@@ -1,0 +1,17 @@
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  a {
+    color: white;
+    margin: 0 2rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: all 500ms ease;
+
+    &:hover {
+      color: aqua;
+    }
+  }
+}
