@@ -1,8 +1,10 @@
-# Data Salad 🥗
+# Data Garden 🌱🍄🌼
 
-Mixed data structure practice and whatnot, served up with algorithms on the side.
+Mixed data structure practice and whatnot, with a side of algorithms.
 
 This is my garden of sorts. Experiments and fun. And the not-so-fun, but necessary.
+
+Uses Parcel to bundle, and TypeScript + React to implement UI and functions.
 
 ## Try it out!
 

@@ -4,7 +4,7 @@
   "description": "Mixed data structure practice and whatnot, served up with algorithms on the side.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "parcel src/index.html --open",
     "build": "parcel build dist"
   },
@@ -20,13 +20,16 @@
   "homepage": "https://github.com/missionmike/data-salad#readme",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.0.0-rc.0",
+    "@types/jest": "^27.0.2",
     "@types/react": "^17.0.24",
     "@types/react-dom": "^17.0.9",
     "@types/react-router-dom": "^5.3.0",
+    "jest": "^27.2.5",
     "parcel": "^2.0.0-rc.0",
     "parcel-bundler": "^1.12.5",
     "sass": "^1.42.1",
-    "typescript": "^4.4.3"
+    "ts-jest": "^27.0.5",
+    "typescript": "^4.4.4"
   },
   "dependencies": {
     "react": "^17.0.2",
