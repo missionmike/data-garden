@@ -12,7 +12,7 @@ class HashMap {
   }
 
   set(key: string, val: any) {
-    const index: number = this.hashStr(key);
+    const index: number = this.hash(key);
 
     if (!this._storage[index]) {
       this._storage[index] = [[key, val]];
@@ -22,7 +22,7 @@ class HashMap {
   }
 
   get(key: string) {
-    const index: number = this.hashStr(key);
+    const index: number = this.hash(key);
 
     if (!this._storage[index]) {
       return undefined;
@@ -35,11 +35,19 @@ class HashMap {
     }
   }
 
-  hashStr(str: string): number {
+  hash(str: string): number {
     let finalHash = 0;
     for (let i = 0; i < str.length; i += 1) {
       finalHash += str.charCodeAt(i);
     }
+    /**
+     * Prevents anagrams from returning the same hash value.
+     *
+     * Without the next addition to finalHash, the hash value
+     * for "test" would equal the same for "tset"
+     */
+    finalHash += str.charCodeAt(Math.floor(str.length / 2));
+
     return finalHash;
   }
 

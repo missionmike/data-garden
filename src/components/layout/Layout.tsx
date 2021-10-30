@@ -1,13 +1,14 @@
-import React from "react";
 import "./Layout.scss";
+
 import { Nav } from "./Nav";
+import React from "react";
 
 const Layout = ({
   title = "",
   children,
 }: {
   title?: string;
-  children?: React.ReactElement;
+  children?: React.ReactElement | React.ReactElement[];
 }) => (
   <React.Fragment>
     <header>
