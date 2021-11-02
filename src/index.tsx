@@ -1,7 +1,7 @@
 import { BrowserRouter, Route } from "react-router-dom";
 
 import HashMap from "./pages/HashMap.mdx";
-import { Home } from "./pages/Home";
+import Home from "./pages/Home.mdx";
 import React from "react";
 import { render } from "react-dom";
 
