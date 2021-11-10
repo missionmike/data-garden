@@ -1,5 +1,6 @@
 @import "reset.css";
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap");
 
 html,
 body {
@@ -15,22 +16,44 @@ body * {
 }
 
 main {
-  max-width: 1024px;
-  width: 100%;
+  max-width: 100%;
+  width: 680px;
   margin: 0 auto;
   padding: 1rem;
   background-color: white;
 }
 
-h1 {
-  font-size: 3rem;
-  letter-spacing: 0.3rem;
-  text-transform: uppercase;
+hr {
+  display: block;
+  margin-bottom: 1rem;
+  margin-top: 3rem;
 }
 
-p {
-  font-family: "Roboto", sans-serif;
+h1 {
+  font-family: "Alex Brush", "Roboto", Tahoma, Arial, sans-serif;
+  font-size: 4rem;
+  letter-spacing: 0rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin-top: 3rem;
+}
+
+p,
+li {
   margin-top: 1rem;
   font-size: 1rem;
   line-height: 1.6rem;
+}
+
+ul {
+  list-style: square outside;
+}
+
+code {
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  background-color: #ddd;
+  color: black;
 }

@@ -1,0 +1,36 @@
+.prism-code {
+  font-size: 1rem;
+  line-height: 1.7rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  letter-spacing: 0.05em;
+  -webkit-overflow-scrolling: touch;
+  background-color: transparent;
+  overflow: initial;
+}
+
+.token {
+  display: inline-block;
+}
+
+.line-number-style {
+  display: inline-block;
+  padding-left: 1em;
+  padding-right: 1em;
+  width: 1.2em;
+  user-select: none;
+  opacity: 0.3;
+  text-align: center;
+  position: relative;
+}
+
+.highlight-line {
+  background-color: rgb(2, 55, 81);
+  border-left: 4px solid rgb(2, 155, 206);
+}
+
+.highlight-line .line-number-style {
+  opacity: 0.5;
+  width: calc(1.2em - 4px);
+  left: -2px;
+}

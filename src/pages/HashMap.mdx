@@ -1,12 +1,223 @@
-import { Anagram } from "./HashMap/Benchmarks";
+import { HashFunctionBreakdown } from "./HashMap/HashFunctionBreakdown";
 import { Layout } from "../components/layout/Layout";
-
 export default Layout;
-
-<Anagram />
 
 # Hash Maps
 
-## What are they?
+---
 
-Hash Maps are a high-performing method of data storage and retrieval.
+## What is a Hash Map?
+
+Hash Maps are a high-performing method of data storage and retrieval. The data
+structure is based on key/value pairs.
+
+Before diving into their underlying structure, let's see how they're used.
+
+A Hash Map is an object. To use it, let's instantiate one:
+
+```js
+let hm = new HashMap();
+```
+
+Then add a key/value pair, using a _string_ as the `key`:
+
+```js {2}
+let hm = new HashMap();
+hm.set("keyname", "this is the value");
+```
+
+It's important to note that the `key` should always be a _string_. However,
+`value` can be any data type.
+
+To retrive a value, there's typically a `get("keyname")` function (i.e. the
+"getter"):
+
+```js {4}
+let hm = new HashMap();
+hm.set("keyname", "this is the value");
+// ...
+console.log(hm.get("keyname")); // "this is the value"
+```
+
+---
+
+## How Does a Hash Map Work Under the Hood?
+
+Underneath the abstraction, the Hash Map data is contained within a
+multi-dimensional array. There are _three_ main function in the `HashMap` class,
+and one private array for data storage.
+
+- **\_storage**: private internal array variable to store data.
+- **hash**: function to accept a string value (the `key`) and output an integer
+  (the "hash").
+- **set**: function to add a key/value pair entry to the Hash Map.
+- **get**: the getter to retrieve a value from the Hash Map.
+
+## The Hash
+
+Within the Hash Map class, there is a private function to "hash" the `key`
+string.
+
+This can look something like this:
+
+```ts
+hash(str: string): number {
+    let finalHash = 0;
+    for (let i = 0; i < str.length; i += 1) {
+      finalHash += str.charCodeAt(i);
+    }
+    return finalHash;
+}
+```
+
+Let's step through this function. First, we inststantiate the `finalHash`
+variable. By the end of this function, the `finalHash` variable will store an
+integer value.
+
+Next, take a look at the `for` loop:
+
+```ts {3-5}
+hash(str: string): number {
+    let finalHash = 0;
+    for (let i = 0; i < str.length; i += 1) {
+      finalHash += str.charCodeAt(i);
+    }
+    return finalHash;
+}
+```
+
+For each of the _characters_ in the `key` string, the loop uses
+[`charCodeAt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt)
+to get an integer between 0-65535 representing its UTF-16 code. This integer
+value is then added to `finalHash` and ultimately returned at the end of our
+`hash` function.
+
+So, using the example string "keyname" as `key`, the `finalHash` value becomes
+**746**:
+
+<HashFunctionBreakdown str="keyname" />
+
+Now, with this _hash_ value of **746** in mind, let's look at the _setter_.
+
+## The Setter
+
+The 2nd line of the setter shows where we're calling the `hash` function on our
+`key` value:
+
+```ts {2}
+set(key: string, val: any) {
+    const index: number = this.hash(key);
+
+    if (!this._storage[index]) {
+      this._storage[index] = [[key, val]];
+    } else {
+      this._storage[index].push([key, val]);
+    }
+}
+```
+
+Then there's a conditional on lines 4-8. Using "keyname" as our example key, we
+know from the previous section that the `hash` value is **746**.
+
+So we're checking:
+
+- Does `this._storage[746]` NOT exist?
+  - If it doesn't exist yet, set `this._storage[746]` to `[key, value]`.
+  - If it exists, push another `[key, value]` pair onto the array stack.
+
+Using our above example, this would be the first addition to the Hash Map, so we
+could visualize line 6 as:
+
+```ts {7}
+this._storage[746] = [["keyname", "this is the value"]];
+```
+
+Here, `this._storage[746]` is set as an _array of arrays_ with one single
+sub-array to start. This sub-array is created in the main index _746_ where
+element `[0]` is the key string, and `[1]` is the value.
+
+JavaScript handles memory allocation dynamically, so we don't need to be
+concerned with how this array contains 746 empty array values before the **746**
+index.
+
+## Collisions
+
+Depending on the hashing algorithm, there's a chance that two `key` values might
+return the same hash. Using our `charCodeAt()` method above, it's safe to assume
+that "keyname" and "namekey" will both return the same hash:
+
+### "keyname"
+
+<HashFunctionBreakdown str="keyname" />
+
+### "namekey"
+
+<HashFunctionBreakdown str="namekey" />
+
+The `hash` function is producing the same sum of `charCodeAt()` values.
+
+**How does this affect the setter?**
+
+If we review the latter part of the conditional, we see this is accounted for.
+Using **746** again as the hashed index value:
+
+```ts {7}
+set(key: string, val: any) {
+    const index: number = this.hash(key);
+
+    if (!this._storage[index]) {
+      this._storage[index] = [[key, val]];
+    } else {
+      this._storage[index].push([key, val]);
+    }
+}
+```
+
+This can be read as:
+
+```ts
+this._storage[746].push(["namekey", "this is another value"]);
+```
+
+Here, a sub-array is pushed on to the main index _746_ where element `[0]` is
+the key string, and `[1]` is the value.
+
+## The Getter
+
+The **getter** is the function designed to find the value we're looking to
+retrieve based on `key`.
+
+Note that the getter requires one string parameter. This string gets hashed
+using the same exact `hash` function as the _setter_.
+
+Using our previous examples, using `hm.get("keyname");` will result in the
+getter searching for index _746_. If this index isn't found in the private
+`_storage` variable, the getter returns `undefined`.
+
+```ts {2}
+get(key: string) {
+    const index: number = this.hash(key);
+
+    if (!this._storage[index]) {
+      return undefined;
+    }
+
+    for (let keyVal of this._storage[index]) {
+      if (keyVal[0] === key) {
+        return keyVal[1];
+      }
+    }
+}
+```
+
+Otherwise, if that index does exist in the `_storage` array, the next step is to
+_loop over_ `_storage[746]` until the first index of each sub-array matches the
+`key` string we're searching for.
+
+Once found, we return the 2nd element in the sub-array.
+
+## Efficiency
+
+The more efficient the hashing algorithm, the faster our Hash Map will operate.
+The more unique a hash value can be generated, the less collisions we'll have,
+resulting in a more efficient lookup ("getter") process as well.
