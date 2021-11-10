@@ -1,12 +1,11 @@
 {
-  "name": "data-salad",
+  "name": "missionmike-garden",
   "version": "1.0.0",
   "description": "Mixed data structure practice and whatnot, served up with algorithms on the side.",
-  "main": "index.js",
   "scripts": {
     "test": "jest",
     "dev": "parcel src/index.html --open",
-    "build": "parcel build dist"
+    "build": "parcel build src/index.html"
   },
   "repository": {
     "type": "git",
