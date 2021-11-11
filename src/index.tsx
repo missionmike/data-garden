@@ -9,7 +9,7 @@ render(
   <BrowserRouter>
     <React.Fragment>
       <Route exact path="/" component={Home} />
-      <Route exact path="/hashmap" component={HashMap} />
+      <Route exact path="/hashmap/" component={HashMap} />
     </React.Fragment>
   </BrowserRouter>,
   document.getElementById("root")

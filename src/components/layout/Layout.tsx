@@ -35,7 +35,7 @@ const Layout = ({
       </main>
       <footer>
         <p style={{ textAlign: "center" }}>
-          A garden by{" "}
+          A seedling by{" "}
           <a href="https://www.missionmike.dev/about/">Mission Mike</a>
         </p>
       </footer>

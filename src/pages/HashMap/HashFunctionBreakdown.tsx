@@ -1,3 +1,5 @@
+import "./HashFunctionBreakdown.scss";
+
 import React from "react";
 
 const HashFunctionBreakdown = ({ str = "keyname" }: { str?: string }) => {

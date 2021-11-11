@@ -6,7 +6,8 @@
   letter-spacing: 0.05em;
   -webkit-overflow-scrolling: touch;
   background-color: transparent;
-  overflow: initial;
+  overflow: scroll;
+  margin-top: 1rem;
 }
 
 .token {

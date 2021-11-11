@@ -15,13 +15,13 @@ Before diving into their underlying structure, let's see how they're used.
 
 A Hash Map is an object. To use it, let's instantiate one:
 
-```js
+```ts
 let hm = new HashMap();
 ```
 
 Then add a key/value pair, using a _string_ as the `key`:
 
-```js {2}
+```ts {2}
 let hm = new HashMap();
 hm.set("keyname", "this is the value");
 ```
@@ -32,7 +32,7 @@ It's important to note that the `key` should always be a _string_. However,
 To retrive a value, there's typically a `get("keyname")` function (i.e. the
 "getter"):
 
-```js {4}
+```ts {4}
 let hm = new HashMap();
 hm.set("keyname", "this is the value");
 // ...
@@ -220,4 +220,5 @@ Once found, we return the 2nd element in the sub-array.
 
 The more efficient the hashing algorithm, the faster our Hash Map will operate.
 The more unique a hash value can be generated, the less collisions we'll have,
-resulting in a more efficient lookup ("getter") process as well.
+resulting in a more efficient lookup ("getter") process as well by limiting how
+many iterations through the array are necessary to find the value.

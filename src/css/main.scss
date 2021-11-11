@@ -13,6 +13,7 @@ body {
 body,
 body * {
   font-family: "Roboto", Tahoma, Arial, sans-serif;
+  box-sizing: border-box;
 }
 
 main {
@@ -27,17 +28,32 @@ hr {
   display: block;
   margin-bottom: 1rem;
   margin-top: 3rem;
+
+  @media screen and (max-width: 640px) {
+    margin: 1rem 0;
+  }
 }
 
 h1 {
   font-family: "Alex Brush", "Roboto", Tahoma, Arial, sans-serif;
   font-size: 4rem;
   letter-spacing: 0rem;
+
+  @media screen and (max-width: 640px) {
+    font-size: 3rem;
+    width: 100%;
+    text-align: center;
+  }
 }
 
 h2 {
   font-size: 1.8rem;
   margin-top: 3rem;
+}
+
+h3 {
+  font-size: 1.6rem;
+  margin-top: 2rem;
 }
 
 p,
