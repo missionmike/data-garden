@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/missionmike/data-salad.git"
+    "url": "git+https://github.com/missionmike/garden.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/missionmike/data-salad/issues"
+    "url": "https://github.com/missionmike/garden/issues"
   },
-  "homepage": "https://github.com/missionmike/data-salad#readme",
+  "homepage": "https://github.com/missionmike/garden#readme",
   "devDependencies": {
     "@mdx-js/parcel-plugin-mdx": "^1.6.22",
     "@parcel/transformer-mdx": "^2.0.0",
